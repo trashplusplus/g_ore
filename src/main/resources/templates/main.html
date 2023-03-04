@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MAIN PAGE</title>
+</head>
+<body>
+    <h1>g_ore project by 0x3</h1>
+    <p>you can add word only if you login like an admin</p>
+
+</body>
+
+    <table>
+        <thread>
+            <tr>
+                <th>All Words: </th>
+            </tr>
+        </thread>
+
+        <tr th:each = "word : ${words}">
+            <th th:text = "${word}"></th>
+        </tr>
+    </table>
+
+</html>
