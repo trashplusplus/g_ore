@@ -9,8 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.User;
 
 
@@ -47,7 +46,7 @@ SimpleController(){
 
     @GetMapping("/register")
     public String register(Model model){
-
+        model.addAttribute("myUser", new MyUser());
         return "register";
     }
 
@@ -58,6 +57,8 @@ SimpleController(){
         arrayList.add(name);
         return "redirect:/";
     }
+    /*
+
 
     @GetMapping("/reg")
     public String register(@RequestParam(name = "name", required = true) String name,
@@ -71,6 +72,18 @@ SimpleController(){
         return "redirect:/";
 
     }
+
+     */
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String postRegister(@RequestBody MyUser myUser){
+        userDAO.add(myUser);
+        arrayList.add("[USER]: " + myUser.getName());
+        manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getName()).password(myUser.getPassword()).roles("USER").build());
+        System.out.println("SIZE: " + arrayList.size());
+        return "redirect:/";
+    }
+
 
     @Bean
     public UserDetailsService userDetailsService(){

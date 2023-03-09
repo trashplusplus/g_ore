@@ -12,6 +12,10 @@ public class MyUser {
     }
 
 
+    public MyUser(){
+
+    }
+
     public String getPassword(){
         return password;
     }

@@ -1,0 +1,77 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "montserrat", sans-serif;
+	min-height: 100vh;
+	background-image: linear-gradient(125deg, #6a86aa, #b583aa);
+	
+}
+
+.container{
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+		color: #343434;
+} 
+
+.h1{
+	font-size: 50px;
+	margin: 0;
+	font-weight: 900;
+	letter-spacing: 20px;
+	text-align: center;
+}
+
+
+
+.register-form{
+	text-decoration: none;
+	color: #123;
+	display: inline-block;
+	border-radius: 25px;
+	font-size: 20px;
+	text-transform: uppercase;
+	transition: 0.4s;
+	font-family: "montserrat", sans-serif;
+	letter-spacing: 2px;
+	padding: 2rem;
+}
+label{
+	display: block;
+}
+#regButton{
+	text-decoration: none;
+	background: #bbaacc;
+	color: #123;
+	padding: 14px 12px;
+	display: inline-block;
+	border-radius: 25px;
+	font-size: 20px;
+	text-transform: uppercase;
+	transition: 0.4s;
+	font-family: "montserrat", sans-serif;
+	letter-spacing: 2px;
+
+}
+
+#regButton:hover{
+	cursor: pointer;
+	background: #aaffbb;
+
+}
+
+input, textarea{
+	background: #bbaacc;
+	color: #123;
+	padding: 14px 12px;
+	display: inline-block;
+	font-size: 10px;
+	font-family: "montserrat", sans-serif;
+	letter-spacing: 2px;
+}
+
+
+
+
