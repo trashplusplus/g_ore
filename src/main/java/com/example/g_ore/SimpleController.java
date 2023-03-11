@@ -1,18 +1,15 @@
 package com.example.g_ore;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.userdetails.User;
-
-
 
 import java.util.ArrayList;
 
@@ -75,8 +72,8 @@ SimpleController(){
 
      */
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String postRegister(@RequestBody MyUser myUser){
+    @PostMapping("/done")
+    public String doneMethod(@RequestBody MyUser myUser){
         userDAO.add(myUser);
         arrayList.add("[USER]: " + myUser.getName());
         manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getName()).password(myUser.getPassword()).roles("USER").build());
