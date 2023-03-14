@@ -37,14 +37,13 @@ SimpleController(){
 
     @GetMapping("/admin")
     public String admin(Model model){
-
         return "admin";
     }
 
-    @GetMapping("/register")
-    public String register(Model model){
-        model.addAttribute("myUser", new MyUser());
-        return "register";
+    @GetMapping(value = "/register")
+    public String register(Model model, MyUser myUser){
+        model.addAttribute("myUser", myUser);
+        return "index";
     }
 
 
@@ -71,20 +70,21 @@ SimpleController(){
     }
 
      */
-
     @PostMapping("/done")
     public String doneMethod(@RequestBody MyUser myUser){
         userDAO.add(myUser);
         arrayList.add("[USER]: " + myUser.getName());
         manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getName()).password(myUser.getPassword()).roles("USER").build());
         System.out.println("SIZE: " + arrayList.size());
+        System.out.println("WORKSSS" + myUser);
         return "redirect:/";
+
     }
 
 
     @Bean
     public UserDetailsService userDetailsService(){
-        //manager.createUser(User.withDefaultPasswordEncoder().username("admin").password("admin").roles("ADMIN").build());
+        manager.createUser(User.withDefaultPasswordEncoder().username("admin").password("admin").roles("ADMIN").build());
         //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
         return manager;
     }

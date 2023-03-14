@@ -19,24 +19,20 @@ public class SecurityConfig {
 
 
         http
-
+                .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
 
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/main", "/").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/done").permitAll()
                         .requestMatchers("/css/**").permitAll()
-
-
-                .anyRequest().permitAll());
-
-
-
-
+                        .requestMatchers(HttpMethod.POST, "/done").anonymous()
+                        .requestMatchers(HttpMethod.GET, "/register").anonymous()
+                .anyRequest().authenticated());
         return http.build();
     }
+
+
 
 
 

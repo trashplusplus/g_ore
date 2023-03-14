@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel ="stylesheet" th:href = "@{css/register.css}"/>
-
+    <link rel ="stylesheet" type = "text/css" media = "screen" th:href = "@{/css/register.css}"/>
 </head>
 <body>
-<div class= "container">
+
     <h1>Register Page</h1>
-    <form th:method="POST" class = "register-form" th:action = "@{/done}" th:object="${myUser}">
+    <form role = "form" th:method="POST" class = "register-form" th:action = "@{/done/}", th:object="${myUser}">
         <label for = "name">
             Enter your name here:
         </label>
@@ -18,12 +17,12 @@
             Enter your password here:
         </label>
 
-        <input type = "text" id = "password" th:field="*{password}"><br><br>
+        <input type = "text" th:field="*{password}" id = "password"><br><br>
 
         <input type="submit" value="Register", id = "regButton">
 
     </form>
-</div>
+
 
 
 </body>
