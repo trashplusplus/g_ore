@@ -14,24 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-
 @Controller
 public class SimpleController {
 
-    ArrayList<MyUser> arrayList = new ArrayList<>();
     InMemoryUserDetailsManager manager;
+    MyUserServiceImpl userService;
 
-
-    SimpleController(){
-    manager = new InMemoryUserDetailsManager();
+    public SimpleController(MyUserServiceImpl userService){
+        manager = new InMemoryUserDetailsManager();
+        this.userService = userService;
     }
-
 
     @GetMapping(value = {"/", "/main"})
     public String mainPage(Model model){
 
-        model.addAttribute("words", arrayList);
+        //model.addAttribute("words", arrayList);
 
         return "main";
     }
@@ -73,19 +70,20 @@ public class SimpleController {
      */
     @PostMapping("/done")
     public String doneMethod(@RequestBody MyUser myUser){
-        arrayList.add(myUser);
+       // arrayList.add(myUser);
         //manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getUsername()).password(myUser.getPassword()).roles("USER").build());
         System.out.println("WORKSSS" + myUser);
 
        // System.out.println("SIZE: " + usersCRUD.getAllMyUsers().size());
-        //serService.save(myUser);
+        userService.save(myUser);
         return "redirect:/";
 
     }
 
     @Bean
     public UserDetailsService userDetailsService(){
-        manager.createUser(User.withDefaultPasswordEncoder().username("admin").password("admin").roles("ADMIN").build());
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("admin").password("admin").roles("ADMIN").build());
         //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
         return manager;
     }
