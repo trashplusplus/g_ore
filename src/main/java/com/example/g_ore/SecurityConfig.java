@@ -16,15 +16,13 @@ public class SecurityConfig {
     @Bean
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-
-
         http
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
 
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/main", "/").permitAll()
+                        .requestMatchers("/main", "/", "/size").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/done").anonymous()
                         .requestMatchers(HttpMethod.GET, "/register").anonymous()

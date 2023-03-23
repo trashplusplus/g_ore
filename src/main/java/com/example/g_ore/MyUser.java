@@ -1,33 +1,29 @@
 package com.example.g_ore;
 
+
+import org.hibernate.annotations.Entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class MyUser {
-
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(name = "username")
+    private String username;
+    @Column(name = "pasword")
     private String password;
-    private int age;
-
-    public MyUser(String name, String password, int age){
-        this.name = name;
-        this.password = password;
-        this.age = age;
-    }
 
     public MyUser(){
 
     }
-    public String getPassword(){
-        return password;
-    }
-    public String getName(){
-        return name;
-    }
-
-    public int getAge(){
-        return age;
-    }
-
+    
     @Override
     public String toString(){
-        return String.format("[%s]: {%s}, {%d}", name, password, age);
+        return String.format("[%d] %s | %s", id, username, password);
     }
+
+
 }

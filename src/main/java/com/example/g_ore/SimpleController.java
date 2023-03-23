@@ -9,22 +9,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
 @Controller
 public class SimpleController {
 
-    ArrayList<String> arrayList = new ArrayList<>();
-
-
+    ArrayList<MyUser> arrayList = new ArrayList<>();
     InMemoryUserDetailsManager manager;
-    UserDAO userDAO = new UserDAO();
 
-SimpleController(){
+
+    SimpleController(){
     manager = new InMemoryUserDetailsManager();
-}
+    }
 
 
     @GetMapping(value = {"/", "/main"})
@@ -50,7 +51,7 @@ SimpleController(){
     @GetMapping("/create")
     public String newWord(@RequestParam(name = "name", required = true, defaultValue = "1") String name, Model model){
         //model.addAttribute("name", name);
-        arrayList.add(name);
+
         return "redirect:/";
     }
     /*
@@ -72,15 +73,15 @@ SimpleController(){
      */
     @PostMapping("/done")
     public String doneMethod(@RequestBody MyUser myUser){
-        userDAO.add(myUser);
-        arrayList.add("[USER]: " + myUser.getName());
-        manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getName()).password(myUser.getPassword()).roles("USER").build());
-        System.out.println("SIZE: " + arrayList.size());
+        arrayList.add(myUser);
+        //manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getUsername()).password(myUser.getPassword()).roles("USER").build());
         System.out.println("WORKSSS" + myUser);
+
+       // System.out.println("SIZE: " + usersCRUD.getAllMyUsers().size());
+        //serService.save(myUser);
         return "redirect:/";
 
     }
-
 
     @Bean
     public UserDetailsService userDetailsService(){
@@ -97,9 +98,6 @@ SimpleController(){
         model.addAttribute("name", currentName);
         return "user";
     }
-
-
-
 
 
 }
