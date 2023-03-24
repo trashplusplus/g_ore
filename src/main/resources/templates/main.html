@@ -17,15 +17,16 @@
 
 <div class = "list">
 
+
     <table>
         <thread>
             <tr>
-                <th> Users: </th>
+                <th th:text = "'Users' + '[' + ${userSize} + ']'">Users</th>
             </tr>
         </thread>
 
-        <tr th:each = "myUser : ${myUsers}">
-            <th th:text = "${myUser}"></th>
+        <tr th:each = "user : ${users}">
+            <th th:text = "${user}"></th>
         </tr>
     </table>
 

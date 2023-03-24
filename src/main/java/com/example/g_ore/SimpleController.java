@@ -10,8 +10,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -27,8 +25,8 @@ public class SimpleController {
 
     @GetMapping(value = {"/", "/main"})
     public String mainPage(Model model){
-
-        //model.addAttribute("words", arrayList);
+        model.addAttribute("userSize", userService.getAllMyUsers().size());
+        model.addAttribute("users", userService.getAllMyUsers());
 
         return "main";
     }
@@ -39,9 +37,9 @@ public class SimpleController {
     }
 
     @GetMapping(value = "/register")
-    public String register(Model model, MyUser myUser){
-        model.addAttribute("myUser", myUser);
-        return "index";
+    public String register(Model model){
+        model.addAttribute("myUser", new MyUser());
+        return "register";
     }
 
 
@@ -68,22 +66,24 @@ public class SimpleController {
     }
 
      */
-    @PostMapping("/done")
-    public String doneMethod(@RequestBody MyUser myUser){
-       // arrayList.add(myUser);
-        //manager.createUser(User.withDefaultPasswordEncoder().username(myUser.getUsername()).password(myUser.getPassword()).roles("USER").build());
-        System.out.println("WORKSSS" + myUser);
-
-       // System.out.println("SIZE: " + usersCRUD.getAllMyUsers().size());
-        userService.save(myUser);
+    @GetMapping("/getUsers")
+    public String getUsers(Model model){
         return "redirect:/";
-
     }
+
+
 
     @Bean
     public UserDetailsService userDetailsService(){
         manager.createUser(User.withDefaultPasswordEncoder()
                 .username("admin").password("admin").roles("ADMIN").build());
+
+        for(MyUser user: userService.getAllMyUsers()){
+            manager.createUser(User.withDefaultPasswordEncoder().username(user.getUsername()
+            ).password(user.getPassword()).roles("USER").build());
+        }
+
+
         //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
         return manager;
     }

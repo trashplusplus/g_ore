@@ -8,11 +8,12 @@
 <body>
 
     <h1>Register Page</h1>
-    <form role = "form" th:method="POST" class = "register-form" th:action = "@{/done/}", th:object="${myUser}">
-        <label for = "name">
+    <form method="post" class = "register-form" th:action = "@{/posts/done}",
+          th:object="${myUser}">
+        <label for = "username">
             Enter your name here:
         </label>
-        <input type = "text" th:field="*{name}" id = "name"><br><br>
+        <input type = "text" th:field="*{username}" id = "username"><br><br>
         <label for = "password">
             Enter your password here:
         </label>
