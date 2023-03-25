@@ -6,5 +6,9 @@ public interface MyUserService {
     void save(MyUser myUser);
     void delete(MyUser myUser);
     List<MyUser> getAllMyUsers();
-    MyUser getById(int id);
+    MyUser getById(long id);
+    MyUser findByUsername(String username);
+
+    void flush();
+
 }

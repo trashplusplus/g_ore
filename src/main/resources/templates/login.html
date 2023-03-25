@@ -7,19 +7,16 @@
 </head>
 <body>
 
-    <h1>Register Page</h1>
-    <form method="post" class = "register-form" th:action = "@{/posts/done}",
-          th:object="${myUser}">
+    <h1>Login Page</h1>
+    <form method="post" class = "login-form" th:action = "@{/login}">
         <label for = "username">
-            Enter your name here:
+            Username:
         </label>
-        <input type = "text" th:field="*{username}" id = "username"><br><br>
+        <input type = "text" id = "username" name = "username"><br><br>
         <label for = "password">
-            Enter your password here:
+            Password:
         </label>
-
-        <input type = "text" th:field="*{password}" id = "password"><br><br>
-
+        <input type = "text" id = "password" name = "password"><br><br>
         <input type="submit" value="Login", id = "regButton">
 
     </form>

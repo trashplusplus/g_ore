@@ -44,7 +44,7 @@ public class MyUser {
 
     @Override
     public String toString(){
-        return String.format("[%d] %s | %s", id, username, password);
+        return String.format("%s", username);
     }
 
 

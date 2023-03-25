@@ -19,6 +19,18 @@ public class PostController {
         return "redirect:/";
     }
 
+    @GetMapping("/delete")
+    public String deleteUserByAdminMethod(@RequestParam("username") String username){
+
+        MyUser deletedUser = userService.findByUsername(username);
+
+        System.out.println("Удален: " + deletedUser);
+        userService.delete(deletedUser);
+        userService.flush();
+
+        return "redirect:/";
+    }
+
 
 
 }

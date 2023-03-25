@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class SimpleController {
+public class GetController {
 
     InMemoryUserDetailsManager manager;
+    //JdbcUserDetailsManager jdbcUserDetailsManager;
     MyUserServiceImpl userService;
 
-    public SimpleController(MyUserServiceImpl userService){
+    public GetController(MyUserServiceImpl userService){
         manager = new InMemoryUserDetailsManager();
         this.userService = userService;
     }
@@ -33,6 +34,9 @@ public class SimpleController {
 
     @GetMapping("/admin")
     public String admin(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentName = authentication.getName();
+        model.addAttribute("currentName", currentName);
         return "admin";
     }
 
@@ -49,28 +53,6 @@ public class SimpleController {
 
         return "redirect:/";
     }
-    /*
-
-
-    @GetMapping("/reg")
-    public String register(@RequestParam(name = "name", required = true) String name,
-                           @RequestParam(name = "password", required = true) String password){
-
-        MyUser user = new MyUser(name, password);
-        userDAO.add(user);
-        arrayList.add("[USER]: " + name);
-        manager.createUser(User.withDefaultPasswordEncoder().username(name).password(password).roles("USER").build());
-
-        return "redirect:/";
-
-    }
-
-     */
-    @GetMapping("/getUsers")
-    public String getUsers(Model model){
-        return "redirect:/";
-    }
-
 
 
     @Bean
@@ -96,6 +78,13 @@ public class SimpleController {
         model.addAttribute("name", currentName);
         return "user";
     }
+
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
 
 
 }

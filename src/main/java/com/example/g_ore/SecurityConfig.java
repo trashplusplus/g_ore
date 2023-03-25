@@ -1,26 +1,33 @@
 package com.example.g_ore;
 
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    @Order(1)
+    @Bean
+    @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/main", "/", "/posts/**").permitAll()
-                        .requestMatchers("/css/**", "/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/posts/done").permitAll()
-                );
+                        .requestMatchers("/main", "/").permitAll()
+                        .requestMatchers("/posts/**").authenticated()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/register").anonymous()
+                        .requestMatchers(HttpMethod.POST, "/posts/done").anonymous()
+                                .anyRequest().authenticated());
+        http.formLogin(form -> form.loginPage("/login").permitAll());
         return http.build();
     }
 

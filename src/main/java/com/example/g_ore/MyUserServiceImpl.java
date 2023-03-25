@@ -21,7 +21,7 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Override
     public void delete(MyUser myUser) {
-
+        myUserDAO.delete(myUser);
     }
 
     @Override
@@ -30,7 +30,19 @@ public class MyUserServiceImpl implements MyUserService {
     }
 
     @Override
-    public MyUser getById(int id) {
-        return null;
+    public MyUser getById(long id) {
+        return myUserDAO.getById(id);
     }
+
+    @Override
+    public MyUser findByUsername(String username){
+        MyUser user = myUserDAO.getMyUserByUsername(username);
+        return user;
+    }
+
+    @Override
+    public void flush(){
+        myUserDAO.flush();
+    }
+
 }

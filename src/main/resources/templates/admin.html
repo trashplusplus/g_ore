@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin page</title>
 </head>
 <body>
   <h1>Admin Page</h1>
 
-  <p th:text = "'Admin name: ' + ${user.getName()}"/>
-
-    <form action = "/create">
-        <label for = "name">Enter new word</label>
-        <input type = "text" id = "name" name = "name"><br><br>
-        <input type="submit" value="Submit">
+  <p th:text = "'Admin name: ' + ${currentName}" t/>
+    <form action = "posts/delete">
+        <label for = "username">Enter username: </label>
+        <input type = "text" id = "username" name = "username"><br><br>
+        <input type="submit" value="Delete user">
     </form>
 </body>
 </html>

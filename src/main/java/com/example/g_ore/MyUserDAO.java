@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MyUserDAO extends JpaRepository<MyUser, Long> {
+    MyUser getMyUserByUsername(String username);
 
 }
