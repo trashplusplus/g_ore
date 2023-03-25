@@ -9,6 +9,9 @@
 
     <h1>Login Page</h1>
     <form method="post" class = "login-form" th:action = "@{/login}">
+        <div  th:if="${param.error}" class = "alert alert-error">
+            Invalid Username or password
+        </div>
         <label for = "username">
             Username:
         </label>
