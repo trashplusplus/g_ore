@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
+    <link rel ="stylesheet" th:href = "@{css/main.css}"/>
 </head>
 <body>
   <h1>Admin Page</h1>
-
+<div class = "container">
   <p th:text = "'Admin name: ' + ${currentName}" t/>
     <form action = "posts/delete">
         <label for = "username">Enter username: </label>
         <input type = "text" id = "username" name = "username"><br><br>
         <input type="submit" value="Delete user">
     </form>
+
+</div>
 </body>
 </html>

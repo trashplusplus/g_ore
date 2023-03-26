@@ -25,10 +25,7 @@ public class GetController {
     }
 
     @GetMapping(value = {"/", "/main"})
-    public String mainPage(Model model){
-        model.addAttribute("userSize", userService.getAllMyUsers().size());
-        model.addAttribute("users", userService.getAllMyUsers());
-
+    public String mainPage(){
         return "main";
     }
 
@@ -74,8 +71,11 @@ public class GetController {
     public String user(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentName = authentication.getName();
+        MyUser myUser = userService.findByUsername(currentName);
 
         model.addAttribute("name", currentName);
+        model.addAttribute("id", myUser.getId());
+        model.addAttribute("password", myUser.getPassword());
         return "user";
     }
 
@@ -85,6 +85,12 @@ public class GetController {
         return "login";
     }
 
+    @GetMapping("/top")
+    public String top(Model model){
+        model.addAttribute("userSize", userService.getAllMyUsers().size());
+        model.addAttribute("users", userService.getAllMyUsers());
+        return "top";
+    }
 
 
 }

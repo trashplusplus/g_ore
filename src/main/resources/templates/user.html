@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>User Page</title>
+    <link rel ="stylesheet" th:href = "@{css/main.css}"/>
 </head>
 <body>
   <h1>User Page</h1>
 
     <p th:text = "'You logged in like: ' + ${name}"></p>
+    <p th:text = "'Your id is: ' + ${id}"></p>
+    <p th:text = "'Your password is: ' + ${password}"></p>
 
 
 </body>

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/posts")
 public class PostController {
+
+
     private MyUserServiceImpl userService;
 
     public PostController(MyUserServiceImpl userService){
@@ -16,7 +18,7 @@ public class PostController {
     public String doneMethod(@ModelAttribute("myUser") MyUser myUser){
         userService.save(myUser);
         System.out.println("Записан: " + myUser);
-        return "redirect:/";
+        return "user";
     }
 
     @GetMapping("/delete")

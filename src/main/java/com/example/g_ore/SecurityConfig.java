@@ -16,18 +16,20 @@ public class SecurityConfig {
     @Bean
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+
+        http.formLogin(form -> form.loginPage("/login").permitAll());
         http
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/main", "/").permitAll()
+                        .requestMatchers("/main", "/", "/top").permitAll()
                         .requestMatchers("/posts/**").authenticated()
                         .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/register").anonymous()
+                        .requestMatchers("/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts/done").anonymous()
                                 .anyRequest().authenticated());
-        http.formLogin(form -> form.loginPage("/login").permitAll());
+
         return http.build();
     }
 
