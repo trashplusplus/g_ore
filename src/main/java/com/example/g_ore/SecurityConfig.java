@@ -13,10 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+
     @Bean
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-
         http.formLogin(form -> form.loginPage("/login").permitAll());
         http
                 .csrf().disable()
@@ -24,7 +24,6 @@ public class SecurityConfig {
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/main", "/", "/top").permitAll()
-                        .requestMatchers("/posts/**").authenticated()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts/done").anonymous()
@@ -33,18 +32,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /*
-    @Bean
-    public UserDetailsService userDetails(){
-        UserDetails user = User.builder()
-                .username("0x3")
-                .password("123")
-                .roles("admin").build();
 
-
-        return new InMemoryUserDetailsManager(user);
-    }
-
-     */
+    
 
 }

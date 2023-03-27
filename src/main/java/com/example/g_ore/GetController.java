@@ -18,10 +18,13 @@ public class GetController {
     InMemoryUserDetailsManager manager;
     //JdbcUserDetailsManager jdbcUserDetailsManager;
     MyUserServiceImpl userService;
+    private final MyUserDAO myUserDAO;
 
-    public GetController(MyUserServiceImpl userService){
+    public GetController(MyUserServiceImpl userService,
+                         MyUserDAO myUserDAO){
         manager = new InMemoryUserDetailsManager();
         this.userService = userService;
+        this.myUserDAO = myUserDAO;
     }
 
     @GetMapping(value = {"/", "/main"})
@@ -52,21 +55,6 @@ public class GetController {
     }
 
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        manager.createUser(User.withDefaultPasswordEncoder()
-                .username("admin").password("admin").roles("ADMIN").build());
-
-        for(MyUser user: userService.getAllMyUsers()){
-            manager.createUser(User.withDefaultPasswordEncoder().username(user.getUsername()
-            ).password(user.getPassword()).roles("USER").build());
-        }
-
-
-        //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
-        return manager;
-    }
-
     @GetMapping("/user")
     public String user(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,5 +80,20 @@ public class GetController {
         return "top";
     }
 
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("admin").password("admin").roles("ADMIN").build());
+
+        for(MyUser user: userService.getAllMyUsers()){
+            manager.createUser(User.withDefaultPasswordEncoder().username(user.getUsername()
+            ).password(user.getPassword()).roles("USER").build());
+        }
+
+
+        //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
+        return manager;
+    }
 
 }
