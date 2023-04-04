@@ -10,6 +10,7 @@ public class PostController {
 
     private MyUserServiceImpl userService;
 
+
     public PostController(MyUserServiceImpl userService){
         this.userService = userService;
     }
@@ -18,7 +19,7 @@ public class PostController {
     public String doneMethod(@ModelAttribute("myUser") MyUser myUser){
         userService.save(myUser);
         System.out.println("Записан: " + myUser);
-        return "user";
+        return "main";
     }
 
     @GetMapping("/delete")

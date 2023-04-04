@@ -1,12 +1,9 @@
 package com.example.g_ore;
 
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class GetController {
 
-    InMemoryUserDetailsManager manager;
+    JdbcUserDetailsManager manager;
+
     //JdbcUserDetailsManager jdbcUserDetailsManager;
     MyUserServiceImpl userService;
     private final MyUserDAO myUserDAO;
 
     public GetController(MyUserServiceImpl userService,
-                         MyUserDAO myUserDAO){
-        manager = new InMemoryUserDetailsManager();
+                         MyUserDAO myUserDAO, JdbcUserDetailsManager manager){
+        this.manager = manager;
         this.userService = userService;
         this.myUserDAO = myUserDAO;
+
+        
     }
 
     @GetMapping(value = {"/", "/main"})
@@ -80,9 +80,11 @@ public class GetController {
         return "top";
     }
 
-
+   /*
     @Bean
     public UserDetailsService userDetailsService(){
+
+
         manager.createUser(User.withDefaultPasswordEncoder()
                 .username("admin").password("admin").roles("ADMIN").build());
 
@@ -92,8 +94,10 @@ public class GetController {
         }
 
 
+
+
         //manager.createUser(User.withDefaultPasswordEncoder().username("james").password("admin").roles("USER").build());
         return manager;
     }
-
+*/
 }
