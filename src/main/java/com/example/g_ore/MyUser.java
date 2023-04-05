@@ -14,6 +14,7 @@ public class MyUser {
     @Column(name = "password")
     private String password;
 
+
     public MyUser(){
 
     }

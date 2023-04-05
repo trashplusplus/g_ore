@@ -14,13 +14,11 @@ public class GetController {
 
     JdbcUserDetailsManager manager;
 
-    //JdbcUserDetailsManager jdbcUserDetailsManager;
     MyUserServiceImpl userService;
     private final MyUserDAO myUserDAO;
 
     public GetController(MyUserServiceImpl userService,
-                         MyUserDAO myUserDAO, JdbcUserDetailsManager manager){
-        this.manager = manager;
+                         MyUserDAO myUserDAO){
         this.userService = userService;
         this.myUserDAO = myUserDAO;
 
@@ -64,6 +62,7 @@ public class GetController {
         model.addAttribute("name", currentName);
         model.addAttribute("id", myUser.getId());
         model.addAttribute("password", myUser.getPassword());
+        System.out.println("NAMEEE: " + currentName);
         return "user";
     }
 
