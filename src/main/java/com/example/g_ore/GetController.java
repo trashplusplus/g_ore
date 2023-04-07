@@ -79,6 +79,14 @@ public class GetController {
         return "top";
     }
 
+
+    @GetMapping("/passwordEdit")
+    public String editPassword(Model model){
+        model.addAttribute("oldPassword", new String());
+        model.addAttribute("newPassword", new String());
+        return "passwordEdit";
+    }
+
    /*
     @Bean
     public UserDetailsService userDetailsService(){

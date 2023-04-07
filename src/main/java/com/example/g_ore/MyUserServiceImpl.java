@@ -24,6 +24,8 @@ public class MyUserServiceImpl implements MyUserService {
         myUserDAO.delete(myUser);
     }
 
+
+
     @Override
     public List<MyUser> getAllMyUsers() {
        return myUserDAO.findAll();

@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/admin").hasAuthority("ADMIN")
                 .requestMatchers("/user").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/passwordEdit").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/main", "/", "/top").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/register").permitAll()

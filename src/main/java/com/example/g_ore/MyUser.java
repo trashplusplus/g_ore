@@ -13,8 +13,8 @@ public class MyUser {
     private String username;
     @Column(name = "password")
     private String password;
-
-
+    @Column(name = "authority")
+    private String authority;
     public MyUser(){
 
     }
@@ -41,6 +41,14 @@ public class MyUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAuthority(String authority){
+        this.authority = authority;
+    }
+
+    public String getAuthority(){
+        return authority;
     }
 
     @Override

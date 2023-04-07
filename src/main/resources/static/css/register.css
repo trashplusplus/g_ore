@@ -59,10 +59,13 @@ label{
 #regButton:hover{
 	cursor: pointer;
 	background: #aaffbb;
-
+}
+#backButton:hover{
+	cursor: pointer;
+	background: #aaffbb;
 }
 
-input, textarea{
+input, textarea, #backButton{
 	background: #bbaacc;
 	color: #123;
 	padding: 14px 12px;

@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         MyUser user = userDAO.getMyUserByUsername(username);
 
         HashSet<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority("USER"));
+        roles.add(new SimpleGrantedAuthority(user.getAuthority()));
 
         return new User(user.getUsername(), user.getPassword(), roles);
     }
